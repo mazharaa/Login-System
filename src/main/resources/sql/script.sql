@@ -12,9 +12,11 @@ primary key (`id`)
 
 create table `authorities` (
 `id` INT not null auto_increment,
-`username` VARCHAR(45) not null,
-`authority` VARCHAR(45) not null,
-primary key (`id`)
+`user_id` int NOT NULL,
+`name` VARCHAR(50) not null,
+primary key (`id`),
+KEY `user_id` (`user_id`),
+CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
 
 insert ignore into `users`  values (null, 'happy', '12345', '1');
