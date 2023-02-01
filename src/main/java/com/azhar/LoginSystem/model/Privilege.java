@@ -1,5 +1,7 @@
 package com.azhar.LoginSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -10,6 +12,8 @@ public class Privilege {
     private Long id;
 
     private String name;
+
+    @JsonIgnore
     @ManyToMany(mappedBy = "privileges")
     private Collection<Role> roles;
 

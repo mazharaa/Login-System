@@ -16,10 +16,10 @@ import javax.sql.DataSource;
 public class ProjectSecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().ignoringAntMatchers("/register").csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+        http.csrf().ignoringAntMatchers("/register", "/api/**").csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and().authorizeRequests()
                     .antMatchers("/admin", "/user").authenticated()
-                    .antMatchers("/register").permitAll()
+                    .antMatchers("/register", "/api/**").permitAll()
                     .and().formLogin()
                     .and().httpBasic();
         return http.build();

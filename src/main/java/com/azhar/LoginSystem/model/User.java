@@ -3,18 +3,28 @@ package com.azhar.LoginSystem.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_account")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
+
     private String password;
+
+    private Long role_id;
 
     @ManyToOne
     @JoinColumn(name = "role_id", insertable = false, updatable = false)
     private Role role;
+
+    public Long getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(Long role_id) {
+        this.role_id = role_id;
+    }
 
     public Long getId() {
         return id;

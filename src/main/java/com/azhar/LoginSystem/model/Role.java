@@ -10,8 +10,6 @@ public class Role {
     private Long id;
 
     private String name;
-    @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
 
     @ManyToMany
     @JoinTable(
@@ -39,14 +37,6 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Collection<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Collection<User> users) {
-        this.users = users;
     }
 
     public Collection<Privilege> getPrivileges() {

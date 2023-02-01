@@ -4,13 +4,22 @@ import com.azhar.LoginSystem.Service.PrivilegeService;
 import com.azhar.LoginSystem.exception.ResourceNotFoundException;
 import com.azhar.LoginSystem.model.Privilege;
 import com.azhar.LoginSystem.repository.PrivilegeRepository;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class PrivilegeServiceImpl implements PrivilegeService {
     private PrivilegeRepository privilegeRepository;
 
     public PrivilegeServiceImpl(PrivilegeRepository privilegeRepository) {
         super();
         this.privilegeRepository = privilegeRepository;
+    }
+
+    @Override
+    public List<Privilege> getAllPrivileges() {
+        return privilegeRepository.findAll();
     }
 
     @Override

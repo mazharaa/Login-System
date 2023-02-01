@@ -4,7 +4,9 @@ import com.azhar.LoginSystem.Service.UserService;
 import com.azhar.LoginSystem.exception.ResourceNotFoundException;
 import com.azhar.LoginSystem.model.User;
 import com.azhar.LoginSystem.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
