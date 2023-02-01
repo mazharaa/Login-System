@@ -2,7 +2,6 @@ package com.azhar.LoginSystem.controller;
 
 import com.azhar.LoginSystem.Service.PrivilegeService;
 import com.azhar.LoginSystem.Service.RoleService;
-import com.azhar.LoginSystem.dto.UpdateNewPrivilegesDTO;
 import com.azhar.LoginSystem.model.Privilege;
 import com.azhar.LoginSystem.model.Role;
 import org.springframework.http.HttpStatus;
@@ -40,8 +39,10 @@ public class ApiRoleController {
     }
 
     @PutMapping("/{roleId}/privilege")
-    public ResponseEntity<Role> updateRolePrivileges(@RequestBody UpdateNewPrivilegesDTO updateNewPrivilegesDTO) {
-        return new ResponseEntity<Role>(roleService.updateRolePrivileges(updateNewPrivilegesDTO),
+    public ResponseEntity<Role> updateRolePrivileges(
+            @PathVariable("roleId") Long roleId, @RequestBody List<Long> privilegesId
+    ) {
+        return new ResponseEntity<Role>(roleService.updateRolePrivileges(roleId, privilegesId),
                 HttpStatus.OK);
     }
 

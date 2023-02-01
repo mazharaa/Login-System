@@ -1,7 +1,6 @@
 package com.azhar.LoginSystem.Service.impl;
 
 import com.azhar.LoginSystem.Service.RoleService;
-import com.azhar.LoginSystem.dto.UpdateNewPrivilegesDTO;
 import com.azhar.LoginSystem.exception.ResourceNotFoundException;
 import com.azhar.LoginSystem.model.Privilege;
 import com.azhar.LoginSystem.model.Role;
@@ -56,13 +55,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role updateRolePrivileges(UpdateNewPrivilegesDTO updateNewPrivilegesDTO) {
-        Role existingRole = roleRepository.findById(updateNewPrivilegesDTO.getRoleId()).orElseThrow(() ->
-                new ResourceNotFoundException("Role", "Id", updateNewPrivilegesDTO.getRoleId()));
+    public Role updateRolePrivileges(Long roleId, List<Long> privilegesId) {
+        Role existingRole = roleRepository.findById(roleId).orElseThrow(() ->
+                new ResourceNotFoundException("Role", "Id", roleId));
 
         Collection<Privilege> newRolePrivileges = new ArrayList<>();
 
-        for (Long i : updateNewPrivilegesDTO.getPrivilegesId()) {
+        for (Long i : privilegesId) {
             newRolePrivileges.add(privilegeRepository.findById(i).get());
         }
 
