@@ -1,7 +1,7 @@
 package com.azhar.LoginSystem.model;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class Role {
@@ -11,7 +11,7 @@ public class Role {
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "roles_privileges",
             joinColumns = @JoinColumn(
@@ -21,7 +21,7 @@ public class Role {
                     name = "privilege_id", referencedColumnName = "id"
             )
     )
-    private Collection<Privilege> privileges;
+    private Set<Privilege> privileges;
 
     public Long getId() {
         return id;
@@ -39,11 +39,11 @@ public class Role {
         this.name = name;
     }
 
-    public Collection<Privilege> getPrivileges() {
+    public Set<Privilege> getPrivileges() {
         return privileges;
     }
 
-    public void setPrivileges(Collection<Privilege> privileges) {
+    public void setPrivileges(Set<Privilege> privileges) {
         this.privileges = privileges;
     }
 }

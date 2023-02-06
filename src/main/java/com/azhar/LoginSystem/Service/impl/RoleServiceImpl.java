@@ -8,9 +8,7 @@ import com.azhar.LoginSystem.repository.PrivilegeRepository;
 import com.azhar.LoginSystem.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -59,7 +57,7 @@ public class RoleServiceImpl implements RoleService {
         Role existingRole = roleRepository.findById(roleId).orElseThrow(() ->
                 new ResourceNotFoundException("Role", "Id", roleId));
 
-        Collection<Privilege> newRolePrivileges = new ArrayList<>();
+        Set<Privilege> newRolePrivileges = new HashSet<>();
 
         for (Long i : privilegesId) {
             newRolePrivileges.add(privilegeRepository.findById(i).get());
