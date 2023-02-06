@@ -18,7 +18,8 @@ public class ProjectSecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/register", "/api/**").csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and().authorizeRequests()
-                    .antMatchers("/admin", "/user").authenticated()
+                    .antMatchers("/admin").hasRole("ADMIN")
+                    .antMatchers("/user").hasRole("USER")
                     .antMatchers("/register", "/api/**").permitAll()
                     .and().formLogin()
                     .and().httpBasic();

@@ -1,9 +1,8 @@
 package com.azhar.LoginSystem.config;
 
-import com.azhar.LoginSystem.model.Customer;
 import com.azhar.LoginSystem.model.Privilege;
+import com.azhar.LoginSystem.model.Role;
 import com.azhar.LoginSystem.model.User;
-import com.azhar.LoginSystem.repository.CustomerRepository;
 import com.azhar.LoginSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -34,9 +33,11 @@ public class ProjectUsernamePwdAuthenticationProvider implements AuthenticationP
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
         List<User> user = userRepository.findByUsername(username);
+        Role userRole = user.get(0).getRole();
+
         if (user.size() > 0) {
             if (passwordEncoder.matches(pwd, user.get(0).getPassword())) {
-                return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(user.get(0).getRole().getPrivileges()));
+                return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(userRole, userRole.getPrivileges()));
             } else {
                 throw new BadCredentialsException("Invalid Password!");
             }
@@ -45,8 +46,10 @@ public class ProjectUsernamePwdAuthenticationProvider implements AuthenticationP
         }
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(Collection<Privilege> privileges) {
+    private List<GrantedAuthority> getGrantedAuthorities(Role role, Set<Privilege> privileges) {
         List<GrantedAuthority> grantedAuthorities =new ArrayList<>();
+
+        grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 
         for (Privilege privilege : privileges) {
             grantedAuthorities.add(new SimpleGrantedAuthority(privilege.getName()));
