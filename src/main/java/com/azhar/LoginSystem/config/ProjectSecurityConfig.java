@@ -1,5 +1,6 @@
 package com.azhar.LoginSystem.config;
 
+import com.azhar.LoginSystem.exception.security.CustomAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import javax.sql.DataSource;
@@ -21,8 +23,9 @@ public class ProjectSecurityConfig {
                     .antMatchers("/admin").hasRole("ADMIN")
                     .antMatchers("/user").hasRole("USER")
                     .antMatchers("/register", "/api/**").permitAll()
-                    .and().formLogin()
-                    .and().httpBasic();
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+                .and().formLogin()
+                .and().httpBasic();
         return http.build();
     }
 
@@ -34,5 +37,10 @@ public class ProjectSecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
     }
 }
