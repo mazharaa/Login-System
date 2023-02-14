@@ -2,7 +2,6 @@ package com.azhar.LoginSystem.controller;
 
 import com.azhar.LoginSystem.model.Customer;
 import com.azhar.LoginSystem.model.User;
-import com.azhar.LoginSystem.repository.CustomerRepository;
 import com.azhar.LoginSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class LoginController {
+public class ApiRegisterController {
     @Autowired
     private UserRepository userRepository;
 

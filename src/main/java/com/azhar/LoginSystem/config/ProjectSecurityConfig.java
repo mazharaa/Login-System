@@ -24,7 +24,7 @@ public class ProjectSecurityConfig {
                     .antMatchers("/user").hasRole("USER")
                     .antMatchers("/register", "/api/**").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
-                .and().formLogin()
+                .and().formLogin().loginPage("/login")
                 .and().httpBasic();
         return http.build();
     }
