@@ -9,6 +9,10 @@
 <div sec:authorize="isAuthenticated()">
   Welcome <span sec:authorize="hasRole('ADMIN')">Admin </span>
     <span sec:authorize="hasRole('USER')">User </span>
-    <span sec:authentication="name"></span></div>
+    <span sec:authentication="name"></span>
+</div>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="logout"/>
+</form>
 </body>
 </html>
