@@ -22,9 +22,11 @@ public class ProjectSecurityConfig {
                 .and().authorizeRequests()
                     .antMatchers("/admin").hasRole("ADMIN")
                     .antMatchers("/user").hasRole("USER")
-                    .antMatchers("/register", "/api/**").permitAll()
+                    .antMatchers("/register", "/api/**", "/login").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
-                .and().formLogin().loginPage("/login")
+                .and().formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/home")
                 .and().httpBasic();
         return http.build();
     }

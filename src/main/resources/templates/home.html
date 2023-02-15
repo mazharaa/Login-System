@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+  Welcome <span sec:authorize="hasRole('ADMIN')">Admin </span>
+    <span sec:authorize="hasRole('USER')">User </span>
+    <span sec:authentication="name"></span></div>
+</body>
+</html>

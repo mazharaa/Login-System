@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class LoginPageController {
+public class PageController {
     @GetMapping
     public ModelAndView index(Model model) {
         ModelAndView view = new ModelAndView("login");
@@ -19,6 +19,12 @@ public class LoginPageController {
     @GetMapping("/login")
     public ModelAndView login(Model model) {
         ModelAndView view = new ModelAndView("login");
+        return view;
+    }
+
+    @GetMapping("/home")
+    public ModelAndView home(Model model) {
+        ModelAndView view = new ModelAndView("home");
         return view;
     }
 }
