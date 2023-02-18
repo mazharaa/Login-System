@@ -16,15 +16,21 @@ public class PageController {
         return view;
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login/index")
     public ModelAndView login(Model model) {
         ModelAndView view = new ModelAndView("login");
         return view;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/home/index")
     public ModelAndView home(Model model) {
         ModelAndView view = new ModelAndView("home");
+        return view;
+    }
+
+    @GetMapping("/register/index")
+    public ModelAndView register(Model model) {
+        ModelAndView view = new ModelAndView("register");
         return view;
     }
 }

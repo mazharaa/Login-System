@@ -1,6 +1,9 @@
 package com.azhar.LoginSystem.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
@@ -8,9 +11,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Username is not blank")
+    @NotNull(message = "Username is not nulL")
     private String username;
 
+    @NotBlank(message = "Password is not blank")
+    @NotNull(message = "Password is not nulL")
     private String password;
+
 
     private Long role_id;
 

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 public class ApiRegisterController {
     @Autowired
@@ -20,12 +22,11 @@ public class ApiRegisterController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
+    public ResponseEntity<String> registerUser(@Valid @RequestBody User user) {
         User savedUser = null;
-
-        Customer savedCustomer = null;
         ResponseEntity response = null;
         try {
+            user.setRole_id(Long.valueOf(user.getRole_id()));
             String hashPwd = passwordEncoder.encode(user.getPassword());
             user.setPassword(hashPwd);
             savedUser = userRepository.save(user);

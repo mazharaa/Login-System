@@ -21,10 +21,10 @@ public class ApiUserController {
         return new ResponseEntity<User>(userService.getUserById(id), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
-        return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
-    }
+//    @PostMapping
+//    public ResponseEntity<User> saveUser(@RequestBody User user) {
+//        return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("id") Long id) {
